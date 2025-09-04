@@ -9,6 +9,14 @@ body {
   background-color: rgb(255, 248, 252);
 }
 
-h1 { color: #980956; } 
-h2 { color: #f058a4; } 
-h3 { color: #ffb6c1; } 
+h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; color: #ff69b4; }
+h2 { font-size: 2rem;   font-weight: 600; line-height: 1.3; color: #ff69b4; }
+h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; color: #ff69b4; }
+
+main {
+  max-width: 70ch;      /* readable line length */
+  margin: 0 auto;       /* center the main column */
+  padding: 1.25rem;     /* page padding */
+}
+
+p + p { margin-top: 1rem; }
