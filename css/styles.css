@@ -1,0 +1,14 @@
+/* Light Reset */
+* {box-sizing: border-box;} html, body {margin: 0;padding: 0;}
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: #1f1f1f; /* black text */
+  background-color: rgb(255, 248, 252);
+}
+
+h1 { color: #980956; } 
+h2 { color: #f058a4; } 
+h3 { color: #ffb6c1; } 
