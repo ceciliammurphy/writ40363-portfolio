@@ -6,21 +6,130 @@
 }
 
 body {
-  font-family: "Courier New", Courier, monospace;
-  line-height: 1.5;
+  font-family: 'Fira Sans', system-ui, sans-serif;  /* clean base font */
+  line-height: 1.6;
   font-size: 1rem;
-  color: #1f1f1f; /* black text */
-  background-color: rgb(255, 248, 252);
+  color: #e6e6e6;
+  background-color: #1c1b22;
 }
 
-h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; color: #ff69b4; }
-h2 { font-size: 2rem;   font-weight: 600; line-height: 1.3; color: #ff69b4; }
-h3 { font-size: 1.5rem; font-weight: 600; line-height: 1.3; color: #ff69b4; }
+h1, h2, h3 {
+  font-family: 'Space Mono', monospace;  /* edgy mono for headlines */
+  letter-spacing: 1px;                   /* subtle spacing for impact */
+}
+
+header {
+  display: flex;
+  align-items: center;
+  min-height: 60vh;          /* balanced height */
+  padding: 2rem;
+  gap: 2rem;
+  background-color: #2a2933; /* slightly lighter charcoal than body for contrast */
+}
+
+.header_text {
+  flex: 1;
+  padding: 2rem;
+  color: #e6e6e6;            /* light gray text */
+}
+
+.header_pic {
+  flex: 1;
+  background-color: #3a3947; /* muted dark lavender-gray */
+  min-height: 300px;
+  border-radius: 12px;       /* a bit bolder rounding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ae6ff;            /* icy cyan accent text */
+  font-style: italic;        /* placeholder text feels styled */
+}
+
+h1 {
+  font-size: 2.5rem;   /* big, bold intro */
+  font-weight: 700;
+  color: #ff4f9a;      /* neon magenta accent */
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #9ae6ff;      /* icy cyan */
+  margin-bottom: 0.8rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e6e6e6;      /* soft light gray for subheads */
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #cfcfcf;      /* softer gray for body copy */
+}
+
+nav {
+  background-color: #1c1b22;   /* deep charcoal, matches body */
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #2a2933; /* subtle divider */
+}
+
+nav a {
+  color: #e6e6e6;              /* light gray links */
+  text-decoration: none;
+  margin-right: 2rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #ff4f9a;              /* neon magenta hover */
+}
+
+/* Focus state for accessibility */
+nav a:focus {
+  outline: 2px solid #9ae6ff;  /* icy cyan focus ring */
+  outline-offset: 2px;
+}
+
+/* General hyperlink styles */
+a {
+  color: #9ae6ff;           /* icy cyan default */
+  text-decoration: none;    /* remove underline */
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #ff4f9a;           /* neon magenta on hover */
+}
+
+a:focus {
+  outline: 2px solid #ff4f9a; /* magenta focus ring */
+  outline-offset: 2px;
+}
 
 main {
-  max-width: 70ch;      /* readable line length */
-  margin: 0 auto;       /* center the main column */
-  padding: 1.25rem;     /* page padding */
+  max-width: 65ch;        /* readable line length */
+  margin: 0 auto;         /* centers the main column */
+  padding: 5%;            /* scales with screen size */
+  background-color: #1c1b22; /* same as body for seamless look */
+  color: #cfcfcf;         /* softer gray for body text */
 }
 
-p + p { margin-top: 1rem; }
+section {
+  margin-bottom: 2.5rem;  /* a little extra space for breathing room */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2933; /* subtle divider between sections */
+}
+
+/* Consistent spacing between paragraphs */
+p + p {
+  margin-top: 1rem;
+}
