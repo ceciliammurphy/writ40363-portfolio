@@ -45,6 +45,15 @@ header {
   font-style: italic;        /* placeholder text feels styled */
 }
 
+.header_pic img {
+    width: 100%;
+    height: 100%;
+    max-width: 400px; /* prevents image from exceeding reasonable size */
+    max-height: 400px; /* maintains square-ish proportions */
+    object-fit: cover; /* maintains aspect ration while filling container */
+    border-radius: 10px; /* matched container border radius */
+}
+
 h1 {
   font-size: 2.5rem;   /* big, bold intro */
   font-weight: 700;
