@@ -171,13 +171,36 @@ main {
   flex: 1;
   min-width: 200px;
   padding: 1.5rem;
-  background: #f8f9fa;
+  background: #b41c60;
   border-radius: 8px;
   text-align: center;
 }
 
 .skills-card h3 {
-  color: #ff9e16;
+  color: #ffe9ca;
+  margin-bottom: 0.5rem;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.project-card {
+  padding: 2rem;
+  background: #b41c60;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.project-card h3 {
+  color: #ffe9ca;
+  margin-bottom: 1rem;
+}
+
+.project-card p {
   margin-bottom: 0.5rem;
 }
 
