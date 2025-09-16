@@ -16,10 +16,53 @@ body {
 h1, h2, h3 {
   font-family: 'Space Mono', monospace;  /* edgy mono for headlines */
   letter-spacing: 1px;                   /* subtle spacing for impact */
+  text-align: center;
+}
+
+nav {
+  background-color: #1c1b22;   /* deep charcoal, matches body */
+  text-align: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #2a2933; /* subtle divider */
+}
+
+nav a {
+  color: #e6e6e6;              /* light gray links */
+  text-decoration: none;
+  margin-right: 2rem;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #ff4f9a;              /* neon magenta hover */
+}
+
+/* Focus state for accessibility */
+nav a:focus {
+  outline: 2px solid #9ae6ff;  /* icy cyan focus ring */
+  outline-offset: 2px;
+}
+
+/* General hyperlink styles */
+a {
+  color: #9ae6ff;           /* icy cyan default */
+  text-decoration: none;    /* remove underline */
+  transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #ff4f9a;           /* neon magenta on hover */
+}
+
+a:focus {
+  outline: 2px solid #ff4f9a; /* magenta focus ring */
+  outline-offset: 2px;
 }
 
 header {
   display: flex;
+  text-align: center;
   align-items: center;
   min-height: 60vh;          /* balanced height */
   padding: 2rem;
@@ -84,52 +127,58 @@ p {
   color: #cfcfcf;      /* softer gray for body copy */
 }
 
-nav {
-  background-color: #1c1b22;   /* deep charcoal, matches body */
-  padding: 1rem 2rem;
-  border-bottom: 1px solid #2a2933; /* subtle divider */
-}
-
-nav a {
-  color: #e6e6e6;              /* light gray links */
-  text-decoration: none;
-  margin-right: 2rem;
-  font-weight: 500;
-  transition: color 0.2s ease-in-out;
-}
-
-nav a:hover {
-  color: #ff4f9a;              /* neon magenta hover */
-}
-
-/* Focus state for accessibility */
-nav a:focus {
-  outline: 2px solid #9ae6ff;  /* icy cyan focus ring */
-  outline-offset: 2px;
-}
-
-/* General hyperlink styles */
-a {
-  color: #9ae6ff;           /* icy cyan default */
-  text-decoration: none;    /* remove underline */
-  transition: color 0.2s ease-in-out;
-}
-
-a:hover {
-  color: #ff4f9a;           /* neon magenta on hover */
-}
-
-a:focus {
-  outline: 2px solid #ff4f9a; /* magenta focus ring */
-  outline-offset: 2px;
-}
-
 main {
   max-width: 65ch;        /* readable line length */
   margin: 0 auto;         /* centers the main column */
   padding: 5%;            /* scales with screen size */
   background-color: #1c1b22; /* same as body for seamless look */
   color: #cfcfcf;         /* softer gray for body text */
+}
+
+.about-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 3rem;
+    align-items: center;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.about-text {
+    flex: 2;
+    min-width: 250px;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skills-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.skills-card h3 {
+  color: #ff9e16;
+  margin-bottom: 0.5rem;
 }
 
 section {
