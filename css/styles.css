@@ -19,29 +19,35 @@ h1, h2, h3 {
   text-align: center;
 }
 
-nav {
-  background-color: #1c1b22;   /* deep charcoal, matches body */
-  text-align: center;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #2a2933; /* subtle divider */
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-nav a {
-  color: #e6e6e6;              /* light gray links */
+.logo {
+  font-size: 1.25rem;
+  font-weight: bold;
   text-decoration: none;
-  margin-right: 2rem;
+  color: #ff7912;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ff4f9a;
   font-weight: 500;
-  transition: color 0.2s ease-in-out;
 }
 
-nav a:hover {
-  color: #ff4f9a;              /* neon magenta hover */
-}
-
-/* Focus state for accessibility */
-nav a:focus {
-  outline: 2px solid #9ae6ff;  /* icy cyan focus ring */
-  outline-offset: 2px;
+.nav-links a:hover {
+  color: #f4189f;
 }
 
 /* General hyperlink styles */
@@ -213,4 +219,37 @@ section {
 /* Consistent spacing between paragraphs */
 p + p {
   margin-top: 1rem;
+}
+
+/* Main container for all sections */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive container padding */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Section headings */
+section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+/* Add some visual interest to section headings */
+section h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #28a745;
+  margin: 1rem auto 0;
+  border-radius: 2px;
 }
