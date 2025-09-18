@@ -5,34 +5,37 @@
   padding: 0;
 }
 
+/* Base styles */
 body {
-  font-family: 'Fira Sans', system-ui, sans-serif;  /* clean base font */
+  font-family: 'Montserrat', sans-serif;   /* clean body font */
   line-height: 1.6;
   font-size: 1rem;
-  color: #e6e6e6;
-  background-color: #1c1b22;
+  color: #1E1E1E;                          /* charcoal text */
+  background-color: #FAF9F6;               /* cream background */
 }
 
+/* Headings */
 h1, h2, h3 {
-  font-family: 'Space Mono', monospace;  /* edgy mono for headlines */
-  letter-spacing: 1px;                   /* subtle spacing for impact */
+  font-family: 'Playfair Display', serif;  /* bold editorial headline font */
+  letter-spacing: 0.5px;
   text-align: center;
 }
 
+/* Navigation */
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #FAF9F6;   /* cream */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .logo {
   font-size: 1.25rem;
   font-weight: bold;
   text-decoration: none;
-  color: #ff7912;
+  color: #422D5C;       /* deep violet */
 }
 
 .nav-links {
@@ -42,71 +45,72 @@ h1, h2, h3 {
 
 .nav-links a {
   text-decoration: none;
-  color: #ff4f9a;
+  color: #6B705C;       /* olive */
   font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #f4189f;
-}
-
-/* General hyperlink styles */
-a {
-  color: #9ae6ff;           /* icy cyan default */
-  text-decoration: none;    /* remove underline */
   transition: color 0.2s ease-in-out;
 }
 
+.nav-links a:hover {
+  color: #FF8616;       /* bold tangerine accent */
+}
+
+/* General hyperlinks */
+a {
+  color: #422D5C;       /* deep violet links */
+  text-decoration: none;
+}
+
 a:hover {
-  color: #ff4f9a;           /* neon magenta on hover */
+  color: #FF8616;       /* bold tangerine on hover */
 }
 
 a:focus {
-  outline: 2px solid #ff4f9a; /* magenta focus ring */
+  outline: 2px solid #FF8616;
   outline-offset: 2px;
 }
 
+/* Header section */
 header {
   display: flex;
   text-align: center;
   align-items: center;
-  min-height: 60vh;          /* balanced height */
+  min-height: 60vh;
   padding: 2rem;
   gap: 2rem;
-  background-color: #2a2933; /* slightly lighter charcoal than body for contrast */
+  background-color: #E4D5C7;  /* warm sand background */
 }
 
 .header_text {
   flex: 1;
   padding: 2rem;
-  color: #e6e6e6;            /* light gray text */
+  color: #1E1E1E;
 }
 
 .header_pic {
   flex: 1;
-  background-color: #3a3947; /* muted dark lavender-gray */
+  background-color: #D9C7B5; /* beige neutral */
   min-height: 300px;
-  border-radius: 12px;       /* a bit bolder rounding */
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #9ae6ff;            /* icy cyan accent text */
-  font-style: italic;        /* placeholder text feels styled */
+  color: #6E6E6E;       /* stone gray accent */
+  font-style: italic;
 }
 
 .header_pic img {
     width: 100%;
     height: 100%;
-    max-width: 400px; /* prevents image from exceeding reasonable size */
-    max-height: 400px; /* maintains square-ish proportions */
-    object-fit: cover; /* maintains aspect ration while filling container */
-    border-radius: 10px; /* matched container border radius */
+    max-width: 400px;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 h1 {
-  font-size: 2.5rem;   /* big, bold intro */
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #ff4f9a;      /* neon magenta accent */
+  color: #422D5C;       /* deep violet accent */
   margin-bottom: 1rem;
   line-height: 1.2;
 }
@@ -114,7 +118,7 @@ h1 {
 h2 {
   font-size: 2rem;
   font-weight: 600;
-  color: #9ae6ff;      /* icy cyan */
+  color: #6B705C;       /* olive green */
   margin-bottom: 0.8rem;
   line-height: 1.3;
 }
@@ -122,7 +126,7 @@ h2 {
 h3 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #e6e6e6;      /* soft light gray for subheads */
+  color: #4B4F3A;       /* deep olive/stone */
   margin-bottom: 0.6rem;
   line-height: 1.4;
 }
@@ -130,15 +134,16 @@ h3 {
 p {
   font-size: 1rem;
   margin-bottom: 1rem;
-  color: #cfcfcf;      /* softer gray for body copy */
+  color: #2C2C2C;       /* dark gray for readability */
 }
 
+/* Main content */
 main {
-  max-width: 65ch;        /* readable line length */
-  margin: 0 auto;         /* centers the main column */
-  padding: 5%;            /* scales with screen size */
-  background-color: #1c1b22; /* same as body for seamless look */
-  color: #cfcfcf;         /* softer gray for body text */
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 5%;
+  background-color: #FAF9F6;
+  color: #2C2C2C;
 }
 
 .about-section {
@@ -173,17 +178,19 @@ main {
   gap: 1rem;
 }
 
+/* Skills cards */
 .skills-card {
   flex: 1;
   min-width: 200px;
   padding: 1.5rem;
-  background: #b41c60;
+  background: #eaabe6;   
   border-radius: 8px;
   text-align: center;
+  color: #FAF9F6;        /* light text */
 }
 
 .skills-card h3 {
-  color: #ffe9ca;
+  color: #FAF9F6;        
   margin-bottom: 0.5rem;
 }
 
@@ -193,21 +200,23 @@ main {
   gap: 2rem;
 }
 
+/* Projects */
 .project-card {
   padding: 2rem;
-  background: #b41c60;
-  border: 1px solid #e9ecef;
+  background: #E4D5C7;   /* warm sand */
+  border: 1px solid #E9ECEF;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .project-card h3 {
-  color: #ffe9ca;
+  color: #422D5C;        /* deep violet heading */
   margin-bottom: 1rem;
 }
 
 .project-card p {
   margin-bottom: 0.5rem;
+  color: #2C2C2C;
 }
 
 section {
@@ -240,16 +249,15 @@ section h2 {
   text-align: center;
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #2c3e50;
+  color: #422D5C;        /* deep violet */
 }
 
-/* Add some visual interest to section headings */
 section h2::after {
   content: '';
   display: block;
   width: 50px;
   height: 3px;
-  background: #28a745;
+  background: #FF8616;   /* tangerine accent */
   margin: 1rem auto 0;
   border-radius: 2px;
 }
