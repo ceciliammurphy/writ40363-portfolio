@@ -1,0 +1,9 @@
+{
+  "location": "Manhattan, NY",
+  "temperature": 58,
+  "condition": "Windy",
+  "icon": "💨",
+  "humidity": 47,
+  "windSpeed": 22,
+  "feelsLike": 54
+}
