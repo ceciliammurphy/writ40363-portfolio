@@ -1,17 +1,47 @@
-# writ40363-portfolio
+# Cece Murphy - Web Development Portfolio
 
-Project Description
-    This project is a personal portfolio website designed to showcase my skills, creative work, and professional development as a journalism and digital media student. The site highlights my projects, provides background information about me, and serves as a central hub for my online presence. The focus is on a clean, modern design that balances professionalism with creativity.
-Technologies Used
-    HTML5 & CSS3 for structure and styling
-    Flexbox & Grid for responsive layouts
-    Media Queries for mobile-first responsiveness
-    Git & GitHub for version control and hosting
-Link to Live Site
-    [Your Live GitHub Pages Link Here]
-Special Features / Notes
-    Responsive design that adapts seamlessly across mobile, tablet, and desktop screens
-    Embedded media projects (videos, reels, etc.) with captions and accessible HTML tags
-    Custom typography system (pairing modern sans serif body font with editorial headline font)
-    Navigation bar with internal links for smooth site exploration
-    Light, professional color palette reflecting my personal brand
+**Course:** WRIT 40363 - Introduction to Web Applications
+**Semester:** Fall 2025
+**Institution:** Texas Christian University
+
+## About This Portfolio
+
+This repository contains my web development projects from WRIT 40363. The main portfolio site showcases my work and growth as a web developer.
+
+**Live Portfolio:** [https://github.com/ceciliammurphy/writ40363-portfolio](https://ceciliammurphy.github.io/writ40363-portfolio/)
+
+## Repository Structure
+
+### Main Portfolio (Root)
+The root directory contains my enhanced portfolio website, which I continue to develop throughout the semester.
+
+### Archived Projects
+
+Individual course projects are preserved in the `projects/` directory:
+
+- **[Project 1: Personal Portfolio](projects/project1-original/)** - Original portfolio submission featuring HTML and CSS fundamentals
+- **[Project 2: Local Favorites Tracker](projects/project2-tracker/)** - Interactive application using JavaScript, DOM manipulation, and localStorage
+- **[Project 3: Personal Data Dashboard](projects/project3-dashboard/)** - Coming soon!
+
+## Technologies Used
+
+- HTML5
+- CSS3 (Flexbox, Grid, responsive design)
+- JavaScript (ES6+)
+- Git & GitHub
+- GitHub Pages
+
+## Development Tools
+
+- VS Code
+- GitHub Desktop
+- Live Server extension
+
+## Contact
+
+- **GitHub:** [ceciliammurphy](https://github.com/ceciliammurphy)
+- **Email:** cecilia.m.murphy@tcu.edu
+
+---
+
+*This portfolio demonstrates my learning journey in web development.*
