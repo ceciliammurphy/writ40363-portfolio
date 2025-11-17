@@ -1,25 +1,61 @@
-# Project 3: Personal Data Dashboard
+# Personal Dashboard
 
-**Status:** Coming Soon
-**Start Date:** Week 11 (November 2025)
+A responsive personal dashboard featuring weather, daily quotes, and task management.
 
-## About This Project
+## Features
 
-This folder is reserved for your Project 3 work, where you'll build an interactive data dashboard that fetches and displays information from web APIs.
+- **Weather Widget**: Displays current weather conditions
+- **Daily Quotes**: Random inspirational quotes with refresh button
+- **Task Manager**: Add, complete, and delete personal tasks
+- **Dark/Light Theme**: Toggle between themes with persistence
+- **Responsive Design**: Works on mobile, tablet, and desktop
+- **Data Persistence**: Tasks and theme preferences saved locally
 
-## What You'll Learn
+## Technologies Used
 
-- Working with external APIs
-- Fetching and displaying JSON data
-- Advanced JavaScript techniques
-- Data visualization
-- Asynchronous programming
+- HTML5
+- CSS3 (Grid, Flexbox, Custom Properties)
+- JavaScript (ES6+)
+- fetch() API
+- localStorage
 
-## Getting Started
+## Live Demo
 
-Instructions for Project 3 will be provided in class. This folder is ready and waiting for your work!
+🔗 [View Live Dashboard](https://your-username.github.io/your-repo-name/)
 
----
+## Setup
 
-*This placeholder was created during your portfolio consolidation process.*
+1. Clone the repository
+2. Open `index.html` in a web browser (use Live Server for development)
+3. Customize `data/weather.json` and `data/quotes.json` with your own data
 
+## Project Structure
+
+\```
+project3-dashboard/
+├── index.html          # Main HTML file
+├── css/
+│   └── styles.css      # All styles including themes
+├── js/
+│   └── app.js          # All JavaScript functionality
+├── data/
+│   ├── weather.json    # Weather data
+│   └── quotes.json     # Quotes collection
+└── README.md           # This file
+\```
+
+## Future Enhancements
+
+- Real weather API integration
+- Quote categories and filtering
+- Task categories and priorities
+- Export/import tasks feature
+- Additional widgets
+
+## Author
+
+Cece Murphy
+
+## License
+
+MIT License
