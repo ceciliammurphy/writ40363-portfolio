@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Placeholder] - Your Link Organizer</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="app-name">[Placeholder]</h1>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link active" id="navUserName">Your Name</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section with Profile -->
+    <header class="profile-header">
+        <div class="profile-container">
+            <div class="profile-bio">
+                <h2 class="profile-name" id="profileName">Your Name</h2>
+                <p class="profile-description" id="profileDescription">Your bio goes here. Share a bit about yourself and what you're collecting!</p>
+            </div>
+            <div class="profile-right">
+                <img src="images/profile-placeholder.png" alt="Profile Picture" class="profile-picture" id="profilePicture">
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="addLinkBtn">+ Add Link</button>
+                    <button class="btn btn-secondary" id="addBoardBtn">+ Add Board</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- View Toggle Controls -->
+    <section class="view-controls">
+        <div class="controls-container">
+            <h2>My Boards</h2>
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="waterfall" aria-label="Waterfall view">
+                    <span>⊞</span> Waterfall
+                </button>
+                <button class="view-btn" data-view="carousel" aria-label="Carousel view">
+                    <span>⊲</span> Carousel
+                </button>
+                <button class="view-btn" data-view="list" aria-label="List view">
+                    <span>☰</span> List
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Boards Display Section -->
+    <main class="boards-container" id="boardsContainer">
+        <!-- Board cards will be dynamically inserted here by JavaScript -->
+        <!-- Example structure:
+        <article class="board-card" data-board-id="1">
+            <div class="board-thumbnail">
+                <h3 class="board-name">Events</h3>
+                <div class="link-preview">
+                    <span class="link-count">5 links</span>
+                </div>
+            </div>
+        </article>
+        -->
+    </main>
+
+    <!-- Add Link Modal -->
+    <div class="modal" id="addLinkModal" role="dialog" aria-labelledby="addLinkTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="addLinkTitle">Add New Link</h2>
+                <button class="close-btn" aria-label="Close modal">&times;</button>
+            </div>
+            <form id="addLinkForm" class="modal-form">
+                <div class="form-group">
+                    <label for="linkUrl">URL *</label>
+                    <input type="url" id="linkUrl" name="url" required placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="linkTitle">Title *</label>
+                    <input type="text" id="linkTitle" name="title" required placeholder="Link title">
+                </div>
+                <div class="form-group">
+                    <label for="linkDate">Date (for Events)</label>
+                    <input type="date" id="linkDate" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="linkPrice">Price (for Shopping)</label>
+                    <input type="number" id="linkPrice" name="price" step="0.01" min="0" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>Save to Boards *</label>
+                    <div id="boardCheckboxes" class="checkbox-group">
+                        <!-- Board checkboxes will be dynamically inserted here -->
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Link</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Board Modal -->
+    <div class="modal" id="addBoardModal" role="dialog" aria-labelledby="addBoardTitle" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="addBoardTitle">Create New Board</h2>
+                <button class="close-btn" aria-label="Close modal">&times;</button>
+            </div>
+            <form id="addBoardForm" class="modal-form">
+                <div class="form-group">
+                    <label for="boardName">Board Name *</label>
+                    <input type="text" id="boardName" name="name" required placeholder="My Custom Board">
+                </div>
+                <div class="form-group">
+                    <label for="boardDescription">Description (optional)</label>
+                    <textarea id="boardDescription" name="description" rows="3" placeholder="What will you save here?"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Board</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>
