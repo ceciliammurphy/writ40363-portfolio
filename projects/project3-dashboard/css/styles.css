@@ -3,30 +3,30 @@
    =================================== */
 
 :root {
-  /* Color Palette */
-  --color-primary: #667eea;
-  --color-secondary: #764ba2;
-  --color-accent: #4299e1;
+  /* Color Palette - Citrus Peachy-Orange */
+  --color-primary: #ff9a76;
+  --color-secondary: #ffb088;
+  --color-accent: #ffa45c;
 
-  /* Backgrounds */
-  --color-bg-light: #f7fafc;
-  --color-bg-white: #ffffff;
+  /* Backgrounds - Peachy Color Infused */
+  --color-bg-light: #ffe8d6;
+  --color-bg-white: #fff5eb;
 
-  /* Text Colors */
-  --color-text-dark: #2d3748;
-  --color-text-muted: #718096;
-  --color-text-xlight: #a0aec0;
+  /* Text Colors - Warm Charcoal */
+  --color-text-dark: #3d3d3d;
+  --color-text-muted: #757575;
+  --color-text-xlight: #b0b0b0;
 
   /* UI Elements */
-  --color-border: #e2e8f0;
-  --color-error: #e53e3e;
-  --color-error-bg: #fff5f5;
-  --color-error-border: #fc8181;
+  --color-border: #ffd4b8;
+  --color-error: #e57373;
+  --color-error-bg: #ffebee;
+  --color-error-border: #ef9a9a;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.15);
+  /* Shadows - Subtle soft shadows */
+  --shadow-sm: 0 2px 8px rgba(255, 154, 118, 0.15);
+  --shadow-md: 0 4px 12px rgba(255, 154, 118, 0.2);
+  --shadow-lg: 0 10px 24px rgba(255, 154, 118, 0.25);
 
   /* Spacing */
   --space-sm: 12px;
@@ -42,33 +42,35 @@
   --font-size-3xl: 32px;
 }
 
-/* Dark Theme - Override Variables */
+/* Dark Theme - Override Variables - Cool Dark Tones */
 body.theme-dark {
-  /* Backgrounds */
-  --color-bg-light: #1a202c;
-  --color-bg-white: #2d3748;
+  /* Backgrounds - Deep Cool Blues and Slate */
+  --color-bg-light: #0f1419;
+  --color-bg-white: #1a2332;
 
-  /* Text Colors */
-  --color-text-dark: #f7fafc;
-  --color-text-muted: #cbd5e0;
+  /* Text Colors - Cool Light Tones */
+  --color-text-dark: #e3f2fd;
+  --color-text-muted: #90caf9;
+  --color-text-xlight: #7b93a8;
 
   /* UI Elements */
-  --color-border: #4a5568;
+  --color-border: #2a3f5f;
 
-  /* Accent Colors (lighter in dark mode) */
-  --color-accent: #63b3ed;
+  /* Accent Colors - Cool Cyan/Blue Accent */
+  --color-accent: #4fc3f7;
 
-  /* Shadows (darker in dark mode) */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.5);
+  /* Shadows - Deep cool shadows */
+  --shadow-sm: 0 2px 8px rgba(15, 20, 25, 0.5);
+  --shadow-md: 0 4px 12px rgba(15, 20, 25, 0.6);
+  --shadow-lg: 0 10px 24px rgba(15, 20, 25, 0.7);
 
   /* Error Colors (adjusted for dark mode) */
-  --color-error-bg: #742a2a;
+  --color-error: #ef5350;
+  --color-error-bg: #4a2626;
 
-  /* Header Gradient (different colors for dark mode) */
-  --color-primary: #4a5568;
-  --color-secondary: #2d3748;
+  /* Header Gradient - Cool Blue-Slate Gradient */
+  --color-primary: #1e3a5f;
+  --color-secondary: #0d2847;
 }
 
 * {
@@ -94,21 +96,32 @@ body {
   margin: 0 auto;
 }
 
-header {
-    text-align: center;
+.dashboard-header {
     margin-bottom: 30px;
+    background: var(--color-bg-white);
+    color: var(--color-text-dark);
+    padding: var(--space-lg);
+    text-align: center;
 }
 
-header h1 {
+.dashboard-header h1 {
     color: var(--color-text-dark);
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-sm);
+}
+
+.dashboard-subtitle {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
 }
 
 .header-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
+  gap: var(--space-md);
 }
 
 .theme-toggle {
