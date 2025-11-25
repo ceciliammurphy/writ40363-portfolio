@@ -127,13 +127,15 @@ body {
 
 .profile-bio {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .profile-name {
     font-size: var(--font-size-2xl);
     font-weight: 600;
     color: var(--color-primary);
-    margin-bottom: var(--spacing-xs);
 }
 
 .profile-description {
@@ -158,9 +160,13 @@ body {
     box-shadow: var(--shadow-md);
 }
 
-.action-buttons {
+.action-buttons-row {
+    max-width: 1200px;
+    margin: var(--spacing-lg) auto 0;
+    padding: 0 var(--spacing-md);
     display: flex;
-    gap: var(--spacing-sm);
+    justify-content: space-between;
+    gap: var(--spacing-md);
 }
 
 /* ===================================
@@ -289,6 +295,49 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--spacing-md);
+}
+
+/* Carousel View */
+.boards-container.view-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl) calc(50% - 200px);
+    perspective: 1000px;
+    min-height: 600px;
+    align-items: center;
+    scroll-padding: 0 calc(50% - 200px);
+}
+
+.boards-container.view-carousel .board-card {
+    flex: 0 0 400px;
+    max-width: 400px;
+    scroll-snap-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.boards-container.view-carousel .board-thumbnail {
+    min-height: 500px;
+}
+
+/* List View */
+.boards-container.view-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.boards-container.view-list .board-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.boards-container.view-list .board-thumbnail {
+    min-height: auto;
+    flex: 0 0 200px;
+    padding: var(--spacing-md);
 }
 
 .board-card {
