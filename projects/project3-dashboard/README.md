@@ -1,27 +1,39 @@
 # Personal Dashboard
 
-A responsive personal dashboard featuring weather, daily quotes, and task management.
+A responsive personal dashboard featuring weather, daily quotes, and full task management with due dates, theming, and local persistence.
 
 ## Features
 
-- **Weather Widget**: Displays current weather conditions
-- **Daily Quotes**: Random inspirational quotes with refresh button
-- **Task Manager**: Add, complete, and delete personal tasks
-- **Dark/Light Theme**: Toggle between themes with persistence
-- **Responsive Design**: Works on mobile, tablet, and desktop
-- **Data Persistence**: Tasks and theme preferences saved locally
+- **Weather Widget**: Displays current weather conditions including temperature, humidity, wind speed, and “feels like,” loaded from weather.json.
+- **Daily Quotes**: Loads a random inspirational quote from a JSON file.
+    Includes:
+    - “New Quote” button
+    - Copy Quote to Clipboard functionality
+    - Non-repeating randomizer
+    - Smooth fade animation
+- **Task Manager**: Add, complete, and delete personal tasks with:
+    Stored due dates
+    Due dates displayed with each task
+    Overdue tasks automatically highlighted in red
+    Tasks sorted by due date (soonest → latest)
+    Task statistics (total, completed, pending)
+    Persistent storage using localStorage
+- **Dark/Light Theme**: Toggle between themes using CSS custom properties. User’s theme preference is saved and reloaded automatically.
+- **Responsive Design**: Layout adapts to mobile, tablet, and desktop with CSS Grid + Flexbox.
+- **Data Persistence**: Tasks and theme settings stored locally so they remain after refresh.
 
 ## Technologies Used
 
 - HTML5
-- CSS3 (Grid, Flexbox, Custom Properties)
+- CSS3 (Grid, Flexbox, Custom Properties, Animations)
 - JavaScript (ES6+)
 - fetch() API
+- Clipboard API
 - localStorage
 
 ## Live Demo
 
-🔗 [View Live Dashboard](https://your-username.github.io/your-repo-name/)
+🔗 [View Live Dashboard](https://github.com/ceciliammurphy/writ40363-portfolio)
 
 ## Setup
 
@@ -43,14 +55,6 @@ project3-dashboard/
 │   └── quotes.json     # Quotes collection
 └── README.md           # This file
 \```
-
-## Future Enhancements
-
-- Real weather API integration
-- Quote categories and filtering
-- Task categories and priorities
-- Export/import tasks feature
-- Additional widgets
 
 ## Author
 

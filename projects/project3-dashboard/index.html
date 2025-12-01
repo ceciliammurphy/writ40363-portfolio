@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    
+
     <header class="dashboard-header">
         <div class="header-content">
         <div>
@@ -36,10 +36,15 @@
             <section class="widget quotes-widget">
                 <h2>Daily Inspiration</h2>
                 <div id="quotes-display">
-                    <!-- Quote will appear here -->
+                    <p class="quote-text">Your quote will appear here...</p>
+                    <p class="quote-author">— Author</p>
                 </div>
-                <button id="new-quote-btn" class="btn-primary">New Quote</button>
+                <div class="quotes-buttons">
+                    <button id="new-quote-btn" class="btn-primary">New Quote</button>
+                    <button id="copy-quote-btn" class="btn-secondary">Copy Quote</button>
+                </div>
             </section>
+
 
             <div class="widget tasks-widget">
                 <h2>My Tasks</h2>
@@ -52,8 +57,15 @@
                         placeholder="Add a new task..."
                         required
                     />
+
+                    <input
+                        type="date"
+                        id="task-date"
+                        aria-label="Task due date"
+                    />
                     <button type="submit" class="btn-primary">Add Task</button>
                 </form>
+
 
                 <!-- Task Statistics -->
                 <div id="task-stats" class="task-stats">

@@ -6,72 +6,81 @@
 console.log('Dashboard app loaded!');
 console.log('LAB16: Learning fetch() API');
 
+// ==========================================
+// WEATHER WIDGET
+// ==========================================
+
 // Function to load weather data
 function loadWeather() {
-    console.log('🌤️ Loading weather data...');
+  console.log('🌤️ Loading weather data...');
 
-    fetch('./data/weather.json')
-        .then(response => {
-            console.log('✅ Got response:', response);
-            return response.json();
-        })
-        .then(data => {
-            console.log('✅ Weather data loaded:', data);
-            displayWeather(data);
-        })
-        .catch(error => {
-            console.error('❌ Error loading weather:', error);
-            displayWeatherError();
-        });
+  fetch('./data/weather.json')
+    .then(response => {
+      console.log('✅ Got response:', response);
+      return response.json();
+    })
+    .then(data => {
+      console.log('✅ Weather data loaded:', data);
+      displayWeather(data);
+    })
+    .catch(error => {
+      console.error('❌ Error loading weather:', error);
+      displayWeatherError();
+    });
 }
 
 // Function to display weather data in the DOM
 function displayWeather(weather) {
-    console.log('📊 Displaying weather data...');
+  console.log('📊 Displaying weather data...');
 
-    const weatherDisplay = document.getElementById('weather-display');
+  const weatherDisplay = document.getElementById('weather-display');
 
-    weatherDisplay.innerHTML = `
-        <div class="weather-current">
-            <div class="weather-icon">${weather.icon}</div>
-            <div class="weather-temp">${weather.temperature}°F</div>
-            <div class="weather-location">${weather.location}</div>
-            <div class="weather-condition">${weather.condition}</div>
-        </div>
-        <div class="weather-details">
-            <div class="weather-detail">
-                <span>💧 Humidity</span>
-                <strong>${weather.humidity}%</strong>
-            </div>
-            <div class="weather-detail">
-                <span>💨 Wind Speed</span>
-                <strong>${weather.windSpeed} mph</strong>
-            </div>
-            <div class="weather-detail">
-                <span>🌡️ Feels Like</span>
-                <strong>${weather.feelsLike}°F</strong>
-            </div>
-        </div>
-    `;
+  weatherDisplay.innerHTML = `
+    <div class="weather-current">
+      <div class="weather-icon">${weather.icon}</div>
+      <div class="weather-temp">${weather.temperature}°F</div>
+      <div class="weather-location">${weather.location}</div>
+      <div class="weather-condition">${weather.condition}</div>
+    </div>
+    <div class="weather-details">
+      <div class="weather-detail">
+        <span>💧 Humidity</span>
+        <strong>${weather.humidity}%</strong>
+      </div>
+      <div class="weather-detail">
+        <span>💨 Wind Speed</span>
+        <strong>${weather.windSpeed} mph</strong>
+      </div>
+      <div class="weather-detail">
+        <span>🌡️ Feels Like</span>
+        <strong>${weather.feelsLike}°F</strong>
+      </div>
+    </div>
+  `;
 
-    console.log('✅ Weather displayed successfully!');
+  console.log('✅ Weather displayed successfully!');
 }
 
 // Function to show error message if weather data fails to load
 function displayWeatherError() {
-    const weatherDisplay = document.getElementById('weather-display');
+  const weatherDisplay = document.getElementById('weather-display');
 
-    weatherDisplay.innerHTML = `
-        <div class="error-message">
-            <div class="error-icon">⚠️</div>
-            <p>Could not load weather data</p>
-            <p class="error-hint">Check console for details</p>
-        </div>
-    `;
+  weatherDisplay.innerHTML = `
+    <div class="error-message">
+      <div class="error-icon">⚠️</div>
+      <p>Could not load weather data</p>
+      <p class="error-hint">Check console for details</p>
+    </div>
+  `;
 }
 
 // Load weather data when page loads
 loadWeather();
+
+
+// ==========================================
+// QUOTES WIDGET
+// ==========================================
 
 // Global variable to store all quotes
 let allQuotes = [];
@@ -126,6 +135,29 @@ function displayRandomQuote() {
   console.log('Displayed quote:', quote);
 }
 
+// Copy current quote to clipboard
+function copyQuoteToClipboard() {
+  const quoteTextEl = document.querySelector('.quote-text');
+  const quoteAuthorEl = document.querySelector('.quote-author');
+
+  if (!quoteTextEl || !quoteAuthorEl) {
+    alert('No quote available to copy yet!');
+    return;
+  }
+
+  const quoteText = quoteTextEl.textContent;
+  const quoteAuthor = quoteAuthorEl.textContent;
+  const fullQuote = `${quoteText}\n${quoteAuthor}`;
+
+  navigator.clipboard.writeText(fullQuote)
+    .then(() => {
+      alert('Quote copied to clipboard!');
+    })
+    .catch(err => {
+      console.error('Failed to copy quote:', err);
+    });
+}
+
 // Function to show error message
 function displayQuotesError() {
   const quotesDisplay = document.getElementById('quotes-display');
@@ -136,46 +168,65 @@ function displayQuotesError() {
   `;
 }
 
-// Call loadQuotes when page loads
-loadQuotes();
-
-// Set up "New Quote" button
+// Set up "New Quote" + "Copy" buttons
 function setupQuotesButton() {
   const newQuoteBtn = document.getElementById('new-quote-btn');
+  const copyQuoteBtn = document.getElementById('copy-quote-btn');
 
-  newQuoteBtn.addEventListener('click', () => {
-    console.log('New quote button clicked!');
-    displayRandomQuote();
-  });
-}
+  if (newQuoteBtn) {
+    newQuoteBtn.addEventListener('click', () => {
+      console.log('New quote button clicked!');
+      displayRandomQuote();
+    });
+  }
 
-// Call setupQuotesButton after DOM is loaded
-setupQuotesButton();
-
-// ========================================
-// TASKS WIDGET (from LAB18)
-// ========================================
-
-// Function to load tasks from localStorage
-function loadTasks() {
-  const tasksJSON = localStorage.getItem('dashboardTasks');
-
-  if (tasksJSON) {
-    return JSON.parse(tasksJSON);
-  } else {
-    return []; // Return empty array if no tasks yet
+  if (copyQuoteBtn) {
+    copyQuoteBtn.addEventListener('click', () => {
+      console.log('Copy quote button clicked!');
+      copyQuoteToClipboard();
+    });
   }
 }
 
-// Function to save tasks to localStorage
+// Initialize quotes on page load
+loadQuotes();
+setupQuotesButton();
+
+
+// ========================================
+// TASKS WIDGET (with due dates)
+// ========================================
+
+// Load tasks from localStorage
+function loadTasks() {
+  const tasksJSON = localStorage.getItem('dashboardTasks');
+  if (tasksJSON) {
+    return JSON.parse(tasksJSON);
+  } else {
+    return [];
+  }
+}
+
+// Save tasks to localStorage
 function saveTasks(tasks) {
   localStorage.setItem('dashboardTasks', JSON.stringify(tasks));
   console.log('Tasks saved:', tasks);
 }
 
-// Function to display all tasks
+// Sort tasks by due date (soonest first)
+function sortTasksByDueDate(tasks) {
+  return tasks.sort((a, b) => {
+    const timeA = a.dueDate ? new Date(a.dueDate).getTime() : Infinity;
+    const timeB = b.dueDate ? new Date(b.dueDate).getTime() : Infinity;
+
+    if (timeA === timeB) return 0;
+    return timeA < timeB ? -1 : 1;
+  });
+}
+
+// Display all tasks
 function displayTasks() {
-  const tasks = loadTasks();
+  let tasks = loadTasks();
   const tasksList = document.getElementById('tasks-list');
 
   // If no tasks, show message
@@ -189,34 +240,60 @@ function displayTasks() {
     return;
   }
 
+  // Sort by due date (soonest first; tasks without dates at bottom)
+  tasks = sortTasksByDueDate(tasks);
+
   // Clear existing tasks
   tasksList.innerHTML = '';
 
+  // For "overdue" check, compare to today (no time)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   // Display each task
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     const taskItem = document.createElement('div');
     taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
 
-    // Create checkbox
+    // Checkbox
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = task.completed;
-    checkbox.addEventListener('change', () => toggleTask(index));
+    checkbox.addEventListener('change', () => toggleTask(task.id));
 
-    // Create task text
+    // Main content (text + due date)
+    const taskMain = document.createElement('div');
+    taskMain.className = 'task-main';
+
     const taskText = document.createElement('span');
     taskText.className = 'task-text';
     taskText.textContent = task.text;
+    taskMain.appendChild(taskText);
 
-    // Create delete button
+    // Due date (if present)
+    if (task.dueDate) {
+      const dueDateEl = document.createElement('span');
+      dueDateEl.className = 'task-due-date';
+      dueDateEl.textContent = `Due: ${task.dueDate}`;
+      taskMain.appendChild(dueDateEl);
+
+      const dueDateObj = new Date(task.dueDate);
+      dueDateObj.setHours(0, 0, 0, 0);
+
+      if (!task.completed && dueDateObj < today) {
+        taskItem.classList.add('overdue');
+      }
+    }
+
+    // Delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn-delete';
     deleteBtn.textContent = 'Delete';
-    deleteBtn.addEventListener('click', () => deleteTask(index));
+    deleteBtn.addEventListener('click', () => deleteTask(task.id));
 
-    // Append all elements to task item
+    // Assemble
     taskItem.appendChild(checkbox);
-    taskItem.appendChild(taskText);
+    taskItem.appendChild(taskMain);
     taskItem.appendChild(deleteBtn);
 
     tasksList.appendChild(taskItem);
@@ -225,14 +302,15 @@ function displayTasks() {
   updateTaskStats(tasks);
 }
 
-// Function to add a new task
-function addTask(taskText) {
+// Add a new task
+function addTask(taskText, dueDate) {
   const tasks = loadTasks();
 
   const newTask = {
     text: taskText,
     completed: false,
-    id: Date.now() // Unique ID using timestamp
+    id: Date.now(),
+    dueDate: dueDate || null
   };
 
   tasks.push(newTask);
@@ -242,27 +320,34 @@ function addTask(taskText) {
   console.log('Task added:', newTask);
 }
 
-// Set up form submission
+// Set up task form submission
 function setupTaskForm() {
   const taskForm = document.getElementById('task-form');
   const taskInput = document.getElementById('task-input');
+  const taskDateInput = document.getElementById('task-date');
 
   taskForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
 
     const taskText = taskInput.value.trim();
+    const taskDueDate = taskDateInput.value; // "YYYY-MM-DD" or ""
 
     if (taskText) {
-      addTask(taskText);
-      taskInput.value = ''; // Clear input
-      taskInput.focus(); // Focus back on input
+      addTask(taskText, taskDueDate);
+      taskInput.value = '';
+      taskDateInput.value = '';
+      taskInput.focus();
     }
   });
 }
 
-// Function to toggle task complete/incomplete
-function toggleTask(index) {
+// Toggle task complete/incomplete (by id)
+function toggleTask(taskId) {
   const tasks = loadTasks();
+  const index = tasks.findIndex(task => task.id === taskId);
+
+  if (index === -1) return;
+
   tasks[index].completed = !tasks[index].completed;
   saveTasks(tasks);
   displayTasks();
@@ -270,12 +355,15 @@ function toggleTask(index) {
   console.log('Task toggled:', tasks[index]);
 }
 
-// Function to delete a task
-function deleteTask(index) {
+// Delete a task (by id)
+function deleteTask(taskId) {
   const tasks = loadTasks();
+  const index = tasks.findIndex(task => task.id === taskId);
+
+  if (index === -1) return;
+
   const taskToDelete = tasks[index];
 
-  // Optional: Confirm before deleting
   if (confirm(`Delete task: "${taskToDelete.text}"?`)) {
     tasks.splice(index, 1);
     saveTasks(tasks);
@@ -285,7 +373,7 @@ function deleteTask(index) {
   }
 }
 
-// Function to update task statistics
+// Update task statistics
 function updateTaskStats(tasks) {
   const statsDiv = document.getElementById('task-stats');
 
@@ -312,7 +400,11 @@ function updateTaskStats(tasks) {
 displayTasks();
 setupTaskForm();
 
-// Theme Management
+
+// ==========================================
+// THEME MANAGEMENT
+// ==========================================
+
 function initializeTheme() {
   // Check for saved theme preference
   const savedTheme = localStorage.getItem('dashboardTheme');

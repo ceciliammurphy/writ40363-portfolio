@@ -302,23 +302,58 @@ body {
 .btn-primary {
   background: var(--color-accent);
   color: var(--color-bg-white);
-  border: none;
+  border: 2px solid var(--color-accent);
   padding: 10px 20px;
   border-radius: 5px;
   font-size: var(--font-size-sm);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
-  width: 100%;
-  margin-top: 15px;
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: #3182ce;
+  background: transparent;
+  color: var(--color-accent);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
   transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--color-accent);
+  color: var(--color-bg-white);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.quotes-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: 10px;
+}
+
+.quotes-buttons .btn-primary,
+.quotes-buttons .btn-secondary {
+  flex: 1;
+  width: auto;      /* override the 100% */
+  margin-top: 0;    /* override default spacing */
 }
 
 .quote-card {
@@ -350,7 +385,7 @@ body {
 }
 
 .task-form input[type="text"] {
-  flex: 1;
+  flex: 2;
   padding: var(--space-sm);
   border: 1px solid #cbd5e0;
   border-radius: 5px;
@@ -360,6 +395,40 @@ body {
 .task-form input[type="text"]:focus {
   outline: none;
   border-color: var(--color-accent);
+}
+
+.task-form input[type="date"] {
+  flex: 1;
+  padding: var(--space-sm);
+  border: 1px solid #cbd5e0;
+  border-radius: 5px;
+  font-size: var(--font-size-sm);
+  font-family: inherit;              /* matches dashboard font */
+  color: var(--color-text-dark);     /* matches text input color */
+  background: var(--color-bg-white); /* same background */
+  cursor: pointer;
+}
+
+.task-form input[type="date"]:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+/* Let the layout breathe on smaller screens */
+.task-form {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap; /* lets them stack cleanly on mobile */
+}
+
+.task-form input[type="text"],
+.task-form input[type="date"] {
+  min-width: 150px;
+}
+
+.task-form button {
+  flex-shrink: 0;
 }
 
 .task-stats {
@@ -412,6 +481,29 @@ body {
 .task-item.completed .task-text {
   text-decoration: line-through;
   color: var(--color-text-xlight);
+}
+
+.task-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.task-due-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Overdue tasks */
+.task-item.overdue {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+.task-item.overdue .task-due-date {
+  color: var(--color-error);
+  font-weight: 600;
 }
 
 .btn-delete {
