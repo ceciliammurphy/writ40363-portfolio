@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WASHD - Organize your links like bubbles floating in water">
+    <title>WASHD - Link Organizer</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Header - Persistent across all views -->
+    <header class="main-header">
+        <h1 class="logo">
+            <button id="home-btn" class="logo-btn" aria-label="Go to home page">WASHD</button>
+        </h1>
+        <nav>
+            <a href="profile.html" class="profile-link" aria-label="View profile">CECE MURPHY</a>
+        </nav>
+    </header>
+
+    <!-- Floating Add Button - Appears on home and category views -->
+    <button id="add-bead-btn" class="floating-add-btn" aria-label="Add new bead">
+        <span class="add-icon" aria-hidden="true">+</span>
+        <span class="sr-only">Add new bead</span>
+    </button>
+
+    <!-- Main Content Container -->
+    <main id="app-container">
+        
+        <!-- HOME VIEW - 4 Category Bubbles -->
+        <section id="home-view" class="view active" aria-label="Categories">
+            <div class="bubbles-container">
+                <button 
+                    class="category-bubble" 
+                    data-category="events"
+                    aria-label="Events category">
+                    <span class="bubble-label">Events</span>
+                    <span class="bubble-count" data-count="events">0</span>
+                </button>
+                
+                <button 
+                    class="category-bubble" 
+                    data-category="shopping"
+                    aria-label="Shopping category">
+                    <span class="bubble-label">Shopping</span>
+                    <span class="bubble-count" data-count="shopping">0</span>
+                </button>
+                
+                <button 
+                    class="category-bubble" 
+                    data-category="social-media"
+                    aria-label="Social Media category">
+                    <span class="bubble-label">Social Media</span>
+                    <span class="bubble-count" data-count="social-media">0</span>
+                </button>
+                
+                <button 
+                    class="category-bubble" 
+                    data-category="other"
+                    aria-label="Other category">
+                    <span class="bubble-label">Other</span>
+                    <span class="bubble-count" data-count="other">0</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- CATEGORY VIEW - Shows beads for selected category -->
+        <section id="category-view" class="view" aria-label="Category beads" hidden>
+            <div class="category-header">
+                <h2 id="category-title" class="category-name"></h2>
+            </div>
+            <div id="beads-container" class="beads-grid"></div>
+        </section>
+
+    </main>
+
+    <!-- ADD/EDIT BEAD MODAL -->
+    <div id="bead-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" hidden>
+        <div class="modal-overlay" aria-hidden="true"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-heading">Add New Bead</h2>
+                <button class="modal-close" aria-label="Close modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <form id="bead-form" class="bead-form" novalidate>
+                <!-- Hidden field for edit mode -->
+                <input type="hidden" id="bead-id" name="bead-id">
+                
+                <div class="form-group">
+                    <label for="bead-url" class="form-label">
+                        URL
+                        <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input 
+                        type="url" 
+                        id="bead-url" 
+                        name="url" 
+                        class="form-input"
+                        placeholder="https://example.com"
+                        required
+                        aria-required="true"
+                        aria-describedby="url-hint">
+                    <small id="url-hint" class="form-hint">Paste the link you want to save</small>
+                    <div class="form-error" id="url-error" role="alert"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bead-title" class="form-label">
+                        Title
+                        <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="bead-title" 
+                        name="title" 
+                        class="form-input"
+                        placeholder="My awesome link"
+                        required
+                        aria-required="true"
+                        aria-describedby="title-hint">
+                    <small id="title-hint" class="form-hint">This will be the clickable link text</small>
+                    <div class="form-error" id="title-error" role="alert"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bead-category" class="form-label">
+                        Category
+                        <span class="required" aria-label="required">*</span>
+                    </label>
+                    <select 
+                        id="bead-category" 
+                        name="category" 
+                        class="form-select"
+                        required
+                        aria-required="true"
+                        aria-describedby="category-hint">
+                        <option value="">Select a category</option>
+                        <option value="events">Events</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="social-media">Social Media</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <small id="category-hint" class="form-hint suggestion-hint">
+                        <span id="category-suggestion"></span>
+                    </small>
+                    <div class="form-error" id="category-error" role="alert"></div>
+                </div>
+
+                <div class="form-group" id="icon-selector-group" style="display: none;">
+                    <label class="form-label">
+                        Choose Icon
+                        <span class="required" aria-label="required">*</span>
+                    </label>
+                    <div id="icon-options" class="icon-options" role="radiogroup" aria-label="Select icon for your bead">
+                        <!-- Icons will be populated dynamically based on category -->
+                    </div>
+                    <small class="form-hint">Select an icon that represents your link</small>
+                    <div class="form-error" id="icon-error" role="alert"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Save Bead</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/categorizer.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
