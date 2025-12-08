@@ -102,6 +102,42 @@ a:focus {
   outline-offset: 2px;
 }
 
+/* Back Navigation Bar */
+.back-nav {
+  width: 100%;
+  background: #FAF9F6;          /* same cream as body */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Back Nav Link */
+.back-nav a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  color: #422D5C;               /* deep violet */
+  text-decoration: none;
+
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.back-nav a:hover {
+  color: #FF8616;               /* tangerine highlight */
+  transform: translateX(-4px);  /* slight slide left */
+}
+
+.back-nav a:focus {
+  outline: 2px solid #FF8616;
+  outline-offset: 3px;
+}
+
 /* Header section */
 header {
   display: flex;
