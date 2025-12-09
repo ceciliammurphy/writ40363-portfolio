@@ -5,9 +5,16 @@
 
 ## 📋 Project Overview
 
-This is **Project Zed**, an AI-assisted web application built to demonstrate upskilled techniques from WRIT 40363. This project represents the culmination of skills learned across Projects 1-3, enhanced through strategic collaboration with AI development tools.
+This is **Project Zed**, an AI-assisted web application that builds on concepts from Projects 1–3 while introducing more advanced technical patterns. The goal was to design and develop a functional, aesthetic, and scalable Link Collection App — a personal, “it-girl inspired,” Pinterest-adjacent tool where users can save, categorize, and view links in a clean grid layout.
 
-**Project Goal:** Build an ambitious web application that pushes beyond previous course projects, using AI as a development partner to accelerate learning and tackle new technical challenges.
+**Project Zed represents:**
+✔️ My strongest integration of HTML, CSS, and JavaScript
+✔️ A full modular architecture (3 separate JS modules)
+✔️ Async handling for optional thumbnails
+✔️ A refined design system
+✔️ Deep collaboration with AI tools to push beyond my comfort zone
+
+This project prioritizes **learning, iteration, and understanding over perfection.**
 
 ---
 
@@ -27,112 +34,96 @@ This project focuses on:
 ## 🚀 The Application
 
 ### Description
-[Add your project description here - what does your app do? Who is it for?]
+The Link Collection App lets users save and organize personal links in a stylish, responsive grid. It’s essentially “Pinterest’s type-A cousin”: a simple, aesthetic, self-curated inspo board without boards — instead, links can be filtered by category.
 
 ### Key Features
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+- Add links with:
+   - Title
+   - URL
+   - Category (Event, Fashion, Social Media)
+   - Optional price
+   - Optional uploaded thumbnail
+- Auto-rendered, responsive masonry-style grid
+- Dynamic filtering by category
+- Delete functionality
+- Fully persistent data using localStorage
+- Modular JS structure across three files
+- A cohesive, pearly/creamy “it-girl” UI aesthetic
 
 ### Live Demo
-🔗 [View Live Application](#) *(Link to be added after deployment)*
+🔗 https://ceciliammurphy.github.io/writ40363-portfolio/projects/project4-zed/ 
 
 ---
 
 ## 🛠️ Technologies Used
 
 ### Core Technologies
-- **HTML5** - Semantic markup and structure
-- **CSS3** - Advanced styling, animations, and responsive design
-- **JavaScript (ES6+)** - Interactive functionality and logic
+- **HTML5** - Semantic layout and modal/form structure
+- **CSS3** - Variables, grid, responsive breakpoints, animations
+- **JavaScript (ES6+)** - Modular architecture, DOM manipulation, async logic
 
 ### APIs & Libraries
-- [List any external APIs used]
-- [List any libraries/frameworks used]
+- No external APIs (due to CORS limitations)
+- Native FileReader API for handling user-uploaded images
 
 ### AI Development Tools
-- [List AI assistants used - Claude, ChatGPT, Copilot, etc.]
+- ChatGPT – debugging, teaching new concepts, architecture support
+- GitHub Copilot Chat – aesthetic decisions, CSS iterations, UI component logic
+- Claude – alternative explanations for async behavior and grid concepts
 
 ---
 
 ## 💡 Upskilled Techniques
 
-This project demonstrates at least **3 upskilled techniques** from the course:
+Below are the techniques this project demonstrates:
 
 ### From Project 1 (HTML/CSS Foundations)
-- [ ] Advanced CSS animations and transitions
-- [ ] CSS Grid or Flexbox layouts beyond basic grids
-- [ ] Custom CSS properties (variables) for theming
-- [ ] Responsive design with 3+ breakpoints
-- [ ] Advanced typography and design systems
+- [X] Advanced CSS animations and transitions
+- [X] CSS Grid or Flexbox layouts beyond basic grids
+- [X] Custom CSS properties (variables) for theming
+- [X] Responsive design with 3+ breakpoints
+- [X] Advanced typography and design systems
 
 ### From Project 2 (JavaScript Fundamentals)
-- [ ] Complex DOM manipulation patterns
+- [X] Complex DOM manipulation patterns
 - [ ] Event delegation and advanced event handling
-- [ ] Data structures beyond simple arrays/objects
-- [ ] Form validation and error handling
-- [ ] Modular JavaScript (separation of concerns)
+- [X] Data structures beyond simple arrays/objects
+- [X] Form validation and error handling
+- [X] Modular JavaScript (separation of concerns)
 
 ### From Project 3 (APIs & Advanced JS)
 - [ ] Working with real external APIs
-- [ ] Advanced async patterns (Promise.all, error handling)
-- [ ] Complex state management across components
+- [X] Advanced async patterns (Promise.all, error handling)
+- [X] Complex state management across components
 - [ ] Data visualization or processing
-- [ ] Progressive enhancement
+- [X] Progressive enhancement
 
 ### New Techniques (Learned via AI)
 - [ ] New CSS features (container queries, modern selectors)
-- [ ] New JavaScript methods or patterns
+- [X] New JavaScript methods or patterns
 - [ ] Accessibility features (ARIA, keyboard navigation)
 - [ ] Performance optimization techniques
-- [ ] Modern development practices
+- [X] Modern development practices
 
 ---
 
 ## 📁 Project Structure
 
 ```
-project4-zed/
-├── index.html              # Main HTML file
-├── css/                    # Stylesheets
-│   └── [CSS files]
-├── js/                     # JavaScript files
-│   └── [JS files]
-├── images/                 # Image assets
-├── README.md              # This file
-├── AI_COLLABORATION_LOG.md # AI partnership documentation
-├── REFLECTION.md          # Developer reflection
-└── CLAUDE.md              # [If applicable]
+project-zed/
+├── index.html
+├── css/
+│   └── main.css
+├── js/
+│   ├── app.js
+│   ├── storage.js
+│   └── categorizer.js
+├── images/
+├── AI_COLLABORATION_LOG.md
+├── REFLECTION.md
+└── README.md
+└── CLAUDE.md              
 ```
-
----
-
-## 🔧 Setup & Installation
-
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone [repository-url]
-   cd project4-zed
-   ```
-
-2. **Open in browser**
-   - Simply open `index.html` in your web browser
-   - Or use a local server (recommended):
-     ```bash
-     # Using Python 3
-     python3 -m http.server 8000
-     
-     # Or using Node.js
-     npx serve
-     ```
-
-3. **View the application**
-   - Navigate to `http://localhost:8000` (or the appropriate port)
-
-### Dependencies
-[List any dependencies or setup requirements]
 
 ---
 
@@ -140,11 +131,12 @@ project4-zed/
 
 This project was developed in partnership with AI development tools. Full documentation of the AI collaboration process can be found in [`AI_COLLABORATION_LOG.md`](./AI_COLLABORATION_LOG.md), including:
 
-- AI tools used and their specific contributions
-- Key learning moments and breakthroughs
-- Challenges encountered and how they were resolved
-- Evolution of prompting strategies
-- Sample conversations (debugging, concept learning, code review)
+- Tools used
+- Key insights
+- Debugging sessions
+- Concept-learning conversations
+- Code review + refactoring sessions
+- How I rewrote AI-generated patterns into my own code
 
 **Key Principle:** AI was used as a learning accelerator and development partner, not as a replacement for understanding. Every line of code in this project can be explained and justified.
 
@@ -152,39 +144,44 @@ This project was developed in partnership with AI development tools. Full docume
 
 ## 📝 Development Process
 
-### Stage 1: Planning & Setup
-- Defined project scope and MVP features
-- Set up file structure and repository
-- Planned technical approach with AI assistance
+### Stage 1: Planning 
+- Brainstormed features
+- Established minimal UI layout
+- Defined data model and categories
 
 ### Stage 2: Core Development
-- Implemented primary features
-- Iterated based on testing
-- Documented AI conversations and learning moments
+- Built JS modules
+- Implemented localStorage
+- Rendered cards + implemented filtering
 
-### Stage 3: Enhancement & Polish
-- Refined UI/UX design
-- Added accessibility features
-- Conducted thorough testing and bug fixes
+### Stage 3 — Design & Styling
+- Created CSS variables and aesthetic system
+- Styled grid, cards, modal, form
+- Fine-tuned animations
 
-### Stage 4: Final Integration
-- Deployed to GitHub Pages
-- Integrated with main portfolio
-- Completed reflection and documentation
+### Stage 4 — Enhancements
+- Added FileReader support
+- Improved validation
+- Polished accessibility and responsiveness
+
+### Stage 5 — Reflection
+- Documented AI collaboration
+- Completed learning reflection
+- Finalized project for portfolio
 
 ---
 
 ## 🎓 Learning Outcomes
 
 ### Technical Skills Gained
-- [Skill 1]
-- [Skill 2]
-- [Skill 3]
+- Building a real modular JS architecture
+- Handling user-uploaded images asynchronously
+- Designing responsive grid layouts with variable content sizes
 
 ### AI Collaboration Insights
-- [Insight 1]
-- [Insight 2]
-- [Insight 3]
+- How to iterate with AI instead of copying it
+- How to refine prompts over time
+- How AI can act as a design partner, not just a code generator
 
 *For detailed reflection on the learning journey, see [`REFLECTION.md`](./REFLECTION.md)*
 
@@ -203,25 +200,29 @@ The application has been tested on:
 ## 🚧 Known Issues & Future Enhancements
 
 ### Current Limitations
-- [Issue 1]
-- [Issue 2]
+- No automatic thumbnail retrieval from URLs (CORS-related)
+- No global sorting UI (though logic exists internally)
 
 ### Future Improvements
-- [Enhancement 1]
-- [Enhancement 2]
+- Add drag-and-drop organization
+- Add custom themes
+- Add a “notes” field for each link
+- Add keyword search across all links
 
 ---
 
 ## 🙏 Credits & Acknowledgments
 
 ### AI Tools
-- **[Tool Name]** - Used for [specific purpose]
+- **ChatGPT, Copilot, Claude** - Used for explanation, debugging, and iteration
 
-### Resources
-- [List any tutorials, documentation, or resources consulted]
+### Resources 
+- Instructor guidance on upskilling and documentation
+- Class resources
 
 ### Inspiration
-- [Any projects or ideas that inspired this work]
+- Project 2
+- Pinterest
 
 ---
 
@@ -233,10 +234,10 @@ This project was created for educational purposes as part of WRIT 40363 at TCU.
 
 ## 📞 Contact
 
-**Student:** [Your Name]  
-**Course:** WRIT 40363 - Digital Culture and Digital Arts  
+**Student:** Cecilia Murphy  
+**Course:** WRIT 40363 
 **Semester:** Fall 2025  
-**Submission Date:** December 10, 2025
+**Submission Date:** December 9, 2025
 
 ---
 
