@@ -33,31 +33,6 @@ body {
 }
 
 /* ==================== 
-   BACK NAVIGATION 
-   ==================== */
-.back-nav {
-    background: var(--pearl);
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--icy-blue);
-}
-
-.back-nav a {
-    color: var(--steel-blue);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.back-nav a:hover {
-    color: var(--soft-taupe);
-    transform: translateX(-3px);
-}
-
-/* ==================== 
    HEADER 
    ==================== */
 .header {
