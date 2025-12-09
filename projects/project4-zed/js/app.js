@@ -1,487 +1,208 @@
-/**
- * app.js - Main Application Logic for WASHD
- * Handles event listeners and app initialization
- */
-
-// Icon options for each category
-const CATEGORY_ICONS = {
-    'events': {
-        'party': 'Party',
-        'theater': 'Theater',
-        'movie': 'Movie',
-        'concert': 'Concert',
-        'other': 'Other'
-    },
-    'shopping': {
-        'clothes': 'Clothes',
-        'makeup': 'Makeup',
-        'shoes': 'Shoes',
-        'jewelry': 'Jewelry',
-        'hair': 'Hair',
-        'bags': 'Bags',
-        'home': 'Home',
-        'other': 'Other'
-    },
-    'social-media': {
-        'instagram': 'Instagram',
-        'tiktok': 'TikTok',
-        'twitter': 'Twitter',
-        'youtube': 'YouTube',
-        'other': 'Other'
-    },
-    'other': {
-        'link': 'Link',
-        'bookmark': 'Bookmark',
-        'note': 'Note',
-        'idea': 'Idea'
-    }
-};
+// app.js - Main application controller
 
 // DOM Elements
-const elements = {
-    // Navigation
-    homeBtn: document.getElementById('home-btn'),
-    addBeadBtn: document.getElementById('add-bead-btn'),
-    
-    // Modal
-    modal: document.getElementById('bead-modal'),
-    modalOverlay: document.querySelector('.modal-overlay'),
-    modalClose: document.querySelector('.modal-close'),
-    modalTitle: document.getElementById('modal-title'),
-    
-    // Form
-    beadForm: document.getElementById('bead-form'),
-    beadId: document.getElementById('bead-id'),
-    beadUrl: document.getElementById('bead-url'),
-    beadTitle: document.getElementById('bead-title'),
-    beadCategory: document.getElementById('bead-category'),
-    categorySuggestion: document.getElementById('category-suggestion'),
-    iconSelectorGroup: document.getElementById('icon-selector-group'),
-    iconOptions: document.getElementById('icon-options'),
-    iconError: document.getElementById('icon-error'),
-    cancelBtn: document.getElementById('cancel-btn'),
-    submitBtn: document.getElementById('submit-btn'),
-    
-    // Error displays
-    urlError: document.getElementById('url-error'),
-    titleError: document.getElementById('title-error'),
-    categoryError: document.getElementById('category-error'),
-    
-    // Category bubbles
-    categoryBubbles: document.querySelectorAll('.category-bubble'),
-    
-    // Views
-    homeView: document.getElementById('home-view'),
-    categoryView: document.getElementById('category-view')
-};
+const openFormBtn = document.getElementById('openFormBtn');
+const closeFormBtn = document.getElementById('closeFormBtn');
+const cancelFormBtn = document.getElementById('cancelFormBtn');
+const addLinkModal = document.getElementById('addLinkModal');
+const addLinkForm = document.getElementById('addLinkForm');
+const linksGrid = document.getElementById('linksGrid');
+const emptyState = document.getElementById('emptyState');
+const filterButtons = document.querySelectorAll('.filter-btn');
 
-/**
- * Initialize the application
- */
-function init() {
-    console.log('🫧 WASHD App Starting...');
-    
-    // Initialize board (updates counts and shows home view)
-    Board.init();
-    
-    // Set up event listeners
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('App initialized');
+    renderLinks();
     setupEventListeners();
-    
-    console.log('✅ WASHD App Ready!');
-}
+});
 
-/**
- * Set up all event listeners
- */
+// Setup event listeners
 function setupEventListeners() {
-    // Home button
-    elements.homeBtn?.addEventListener('click', () => {
-        Board.showView('home');
+    // Modal controls
+    openFormBtn.addEventListener('click', openModal);
+    closeFormBtn.addEventListener('click', closeModal);
+    cancelFormBtn.addEventListener('click', closeModal);
+    addLinkModal.addEventListener('click', (e) => {
+        if (e.target === addLinkModal) closeModal();
     });
-    
-    // Add bead button
-    elements.addBeadBtn?.addEventListener('click', () => {
-        openModal();
-    });
-    
-    // Category bubbles
-    elements.categoryBubbles.forEach(bubble => {
-        bubble.addEventListener('click', () => {
-            const category = bubble.dataset.category;
-            Board.showView('category', category);
-        });
-    });
-    
-    // Modal close buttons
-    elements.modalClose?.addEventListener('click', closeModal);
-    elements.cancelBtn?.addEventListener('click', closeModal);
-    elements.modalOverlay?.addEventListener('click', closeModal);
-    
+
     // Form submission
-    elements.beadForm?.addEventListener('submit', handleFormSubmit);
-    
-    // URL input - auto-detect category
-    elements.beadUrl?.addEventListener('input', handleUrlInput);
-    
-    // Category change - populate icon options
-    elements.beadCategory?.addEventListener('change', handleCategoryChange);
-    
-    // Close modal on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !elements.modal.hasAttribute('hidden')) {
-            closeModal();
-        }
+    addLinkForm.addEventListener('submit', handleFormSubmit);
+
+    // Filter buttons
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', handleFilterClick);
     });
+
+    console.log('Event listeners attached');
 }
 
-/**
- * Open modal for adding/editing bead
- * @param {Object} bead - Bead object (for editing), or null for new bead
- */
-function openModal(bead = null) {
-    const isEditing = bead !== null;
-    
-    // Update modal title
-    elements.modalTitle.textContent = isEditing ? 'Edit Bead' : 'Add New Bead';
-    elements.submitBtn.textContent = isEditing ? 'Update Bead' : 'Save Bead';
-    
-    // Populate form if editing
-    if (isEditing) {
-        elements.beadId.value = bead.id;
-        elements.beadUrl.value = bead.url;
-        elements.beadTitle.value = bead.title;
-        elements.beadCategory.value = bead.category;
-        
-        // Populate icons and select the bead's icon
-        handleCategoryChange();
-        
-        // Select the icon after icons are populated
-        setTimeout(() => {
-            if (bead.icon) {
-                const iconBtn = elements.iconOptions.querySelector(`[data-icon="${bead.icon}"]`);
-                if (iconBtn) {
-                    selectIcon(iconBtn);
-                }
-            }
-        }, 50);
-    } else {
-        elements.beadForm.reset();
-        elements.beadId.value = '';
-        elements.categorySuggestion.textContent = '';
-        elements.iconSelectorGroup.style.display = 'none';
-    }
-    
-    // Clear errors
-    clearFormErrors();
-    
-    // Show modal
-    elements.modal.removeAttribute('hidden');
-    elements.beadUrl.focus();
-    
-    console.log(isEditing ? '✏️ Editing bead' : '➕ Adding new bead');
+// Open modal
+function openModal() {
+    addLinkModal.classList.add('active');
+    console.log('Modal opened');
 }
 
-/**
- * Close modal
- */
+// Close modal
 function closeModal() {
-    elements.modal.setAttribute('hidden', '');
-    elements.beadForm.reset();
-    elements.iconSelectorGroup.style.display = 'none';
-    clearFormErrors();
-    
-    console.log('✖️ Modal closed');
+    addLinkModal.classList.remove('active');
+    addLinkForm.reset();
+    console.log('Modal closed');
 }
 
-/**
- * Handle URL input for auto-detection
- */
-function handleUrlInput() {
-    const url = elements.beadUrl.value.trim();
-    
-    if (url.length > 0) {
-        const suggestion = Categorizer.getSuggestionMessage(url);
-        elements.categorySuggestion.textContent = suggestion;
-        
-        // Auto-select category if suggestion exists and category not yet selected
-        if (suggestion && !elements.beadCategory.value) {
-            const detectedCategory = Categorizer.detectCategory(url);
-            if (detectedCategory) {
-                elements.beadCategory.value = detectedCategory;
-                handleCategoryChange(); // Trigger icon selector
-            }
-        }
-    } else {
-        elements.categorySuggestion.textContent = '';
-    }
-}
-
-/**
- * Handle category change - populate icon options
- */
-function handleCategoryChange() {
-    const category = elements.beadCategory.value;
-    
-    if (!category) {
-        elements.iconSelectorGroup.style.display = 'none';
-        return;
-    }
-    
-    // Show icon selector
-    elements.iconSelectorGroup.style.display = 'block';
-    
-    // Get icons for this category
-    const icons = CATEGORY_ICONS[category] || CATEGORY_ICONS['other'];
-    
-    // Populate icon options
-    elements.iconOptions.innerHTML = '';
-    Object.entries(icons).forEach(([iconKey, label]) => {
-        const iconBtn = document.createElement('button');
-        iconBtn.type = 'button';
-        iconBtn.className = 'icon-option';
-        iconBtn.setAttribute('data-icon', iconKey);
-        iconBtn.setAttribute('aria-label', label);
-        iconBtn.setAttribute('role', 'radio');
-        iconBtn.setAttribute('aria-checked', 'false');
-        
-        // Create icon image element
-        const iconImg = document.createElement('img');
-        iconImg.src = `images/${iconKey}-icon.png`;
-        iconImg.alt = label;
-        iconImg.className = 'icon-image';
-        
-        iconBtn.appendChild(iconImg);
-        iconBtn.addEventListener('click', () => selectIcon(iconBtn));
-        
-        elements.iconOptions.appendChild(iconBtn);
-    });
-    
-    console.log(`🎨 Loaded ${Object.keys(icons).length} icons for ${category}`);
-}
-
-/**
- * Select an icon option
- * @param {HTMLElement} iconBtn - The clicked icon button
- */
-function selectIcon(iconBtn) {
-    // Remove selection from all icons
-    elements.iconOptions.querySelectorAll('.icon-option').forEach(btn => {
-        btn.classList.remove('selected');
-        btn.setAttribute('aria-checked', 'false');
-    });
-    
-    // Mark this icon as selected
-    iconBtn.classList.add('selected');
-    iconBtn.setAttribute('aria-checked', 'true');
-    
-    // Clear icon error if any
-    elements.iconError.textContent = '';
-    
-    console.log(`🎯 Selected icon: ${iconBtn.dataset.icon}`);
-}
-
-/**
- * Get selected icon
- * @returns {string|null} Selected icon emoji or null
- */
-function getSelectedIcon() {
-    const selectedBtn = elements.iconOptions.querySelector('.icon-option.selected');
-    return selectedBtn ? selectedBtn.dataset.icon : null;
-}
-
-/**
- * Handle form submission
- * @param {Event} e - Submit event
- */
-function handleFormSubmit(e) {
+// Handle form submission
+async function handleFormSubmit(e) {
     e.preventDefault();
     
-    // Clear previous errors
-    clearFormErrors();
-    
-    // Get selected icon
-    const selectedIcon = getSelectedIcon();
-    
-    // Validate form
     const formData = {
-        url: elements.beadUrl.value.trim(),
-        title: elements.beadTitle.value.trim(),
-        category: elements.beadCategory.value,
-        icon: selectedIcon
+        title: document.getElementById('linkTitle').value.trim(),
+        url: document.getElementById('linkUrl').value.trim(),
+        category: document.getElementById('linkCategory').value,
+        price: document.getElementById('linkPrice').value.trim()
     };
-    
-    const errors = validateForm(formData);
-    
-    if (Object.keys(errors).length > 0) {
-        displayFormErrors(errors);
+
+    console.log('Form submitted with data:', formData);
+
+    // Validate URL
+    if (!isValidUrl(formData.url)) {
+        alert('Please enter a valid URL');
         return;
     }
-    
-    // Check if editing or adding
-    const beadId = elements.beadId.value;
-    const isEditing = beadId !== '';
-    
-    try {
-        if (isEditing) {
-            // Update existing bead
-            Storage.updateBead(beadId, formData);
-            console.log('✅ Bead updated');
-        } else {
-            // Add new bead
-            Storage.addBead(formData);
-            console.log('✅ Bead added');
-        }
+
+    // Handle optional image upload
+    const imageInput = document.getElementById('linkImage');
+    if (imageInput.files && imageInput.files[0]) {
+        const imageFile = imageInput.files[0];
+        const reader = new FileReader();
         
-        // Close modal
+        reader.onload = function(e) {
+            formData.thumbnail = e.target.result;
+            // Save to storage after image is loaded
+            Storage.addLink(formData);
+            closeModal();
+            renderLinks();
+        };
+        
+        reader.readAsDataURL(imageFile);
+    } else {
+        // No image uploaded, save without thumbnail
+        formData.thumbnail = null;
+        Storage.addLink(formData);
         closeModal();
-        
-        // Refresh view
-        if (Board.currentView === 'category') {
-            Board.showView('category', Board.currentCategory);
-        } else {
-            Board.updateCategoryCounts();
-        }
-        
-    } catch (error) {
-        console.error('Error saving bead:', error);
-        alert('Error saving bead. Please try again.');
+        renderLinks();
     }
 }
 
-/**
- * Validate form data
- * @param {Object} data - Form data
- * @returns {Object} Object with error messages (empty if valid)
- */
-function validateForm(data) {
-    const errors = {};
-    
-    // Validate URL
-    if (!data.url) {
-        errors.url = 'URL is required';
-    } else if (!isValidUrl(data.url)) {
-        errors.url = 'Please enter a valid URL (must start with http:// or https://)';
-    }
-    
-    // Validate title
-    if (!data.title) {
-        errors.title = 'Title is required';
-    } else if (data.title.length < 2) {
-        errors.title = 'Title must be at least 2 characters';
-    }
-    
-    // Validate category
-    if (!data.category) {
-        errors.category = 'Please select a category';
-    }
-    
-    // Validate icon
-    if (!data.icon) {
-        errors.icon = 'Please select an icon';
-    }
-    
-    return errors;
-}
-
-/**
- * Check if URL is valid
- * @param {string} url - URL to validate
- * @returns {boolean} True if valid
- */
-function isValidUrl(url) {
+// Validate URL
+function isValidUrl(string) {
     try {
-        const urlObj = new URL(url);
-        return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
-    } catch {
+        new URL(string);
+        return true;
+    } catch (_) {
         return false;
     }
 }
 
-/**
- * Display form errors
- * @param {Object} errors - Error messages
- */
-function displayFormErrors(errors) {
-    if (errors.url) {
-        elements.urlError.textContent = errors.url;
-        elements.beadUrl.classList.add('error');
-    }
+// Fetch thumbnail from URL (simplified version)
+async function fetchThumbnail(url) {
+    // Note: Due to CORS restrictions, we'll use a placeholder approach
+    // In a real app, you'd use a backend proxy or API service
     
-    if (errors.title) {
-        elements.titleError.textContent = errors.title;
-        elements.beadTitle.classList.add('error');
-    }
+    // For now, generate a gradient based on category or use a service
+    // Returning null will use the CSS gradient background
     
-    if (errors.category) {
-        elements.categoryError.textContent = errors.category;
-        elements.beadCategory.classList.add('error');
-    }
+    console.log('Attempting to fetch thumbnail for:', url);
     
-    if (errors.icon) {
-        elements.iconError.textContent = errors.icon;
-    }
+    // You could integrate with services like:
+    // - https://www.screenshotmachine.com/
+    // - https://urlbox.io/
+    // - or use Open Graph image meta tags via a proxy
+    
+    return null; // Will use CSS gradient as fallback
 }
 
-/**
- * Clear form errors
- */
-function clearFormErrors() {
-    elements.urlError.textContent = '';
-    elements.titleError.textContent = '';
-    elements.categoryError.textContent = '';
-    elements.iconError.textContent = '';
-    
-    elements.beadUrl.classList.remove('error');
-    elements.beadTitle.classList.remove('error');
-    elements.beadCategory.classList.remove('error');
-}
+// Render links to the grid
+function renderLinks() {
+    const allLinks = Storage.getLinks();
+    const filteredLinks = Categorizer.filterLinks(allLinks, Categorizer.currentFilter);
+    const sortedLinks = Categorizer.sortLinks(filteredLinks);
 
-/**
- * Handle bead edit
- * @param {string} beadId - ID of bead to edit
- */
-function handleEditBead(beadId) {
-    const bead = Storage.getBeadById(beadId);
-    if (bead) {
-        openModal(bead);
-    } else {
-        console.error('Bead not found:', beadId);
-    }
-}
+    console.log('Rendering links:', sortedLinks.length, 'items');
 
-/**
- * Handle bead delete
- * @param {string} beadId - ID of bead to delete
- */
-function handleDeleteBead(beadId) {
-    const bead = Storage.getBeadById(beadId);
-    if (!bead) {
-        console.error('Bead not found:', beadId);
+    // Show/hide empty state
+    if (sortedLinks.length === 0) {
+        linksGrid.innerHTML = '';
+        emptyState.classList.add('show');
         return;
     }
     
-    const confirmed = confirm(`Delete "${bead.title}"?`);
-    
-    if (confirmed) {
-        Storage.deleteBead(beadId);
-        console.log('🗑️ Bead deleted');
-        
-        // Refresh current view
-        if (Board.currentView === 'category') {
-            Board.showView('category', Board.currentCategory);
-        } else {
-            Board.updateCategoryCounts();
-        }
-    }
+    emptyState.classList.remove('show');
+
+    // Build HTML for links
+    linksGrid.innerHTML = sortedLinks.map(link => createLinkCard(link)).join('');
+
+    // Attach delete event listeners
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleDelete(parseInt(btn.dataset.id));
+        });
+    });
 }
 
-// Make edit/delete handlers available globally for dynamically created elements
-window.handleEditBead = handleEditBead;
-window.handleDeleteBead = handleDeleteBead;
+// Create HTML for a single link card
+function createLinkCard(link) {
+    const categoryClass = Categorizer.getCategoryClass(link.category);
+    const categoryEmoji = Categorizer.getCategoryEmoji(link.category);
+    const hasImage = link.thumbnail && link.thumbnail !== null;
+    const cardClass = hasImage ? 'link-card' : 'link-card no-image';
+    
+    return `
+        <article class="${cardClass}" data-id="${link.id}">
+            ${hasImage ? `
+                <img 
+                    src="${link.thumbnail}" 
+                    alt="${link.title}"
+                    class="link-thumbnail"
+                >
+            ` : ''}
+            <div class="link-content">
+                <div class="link-header">
+                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-title">
+                        ${link.title}
+                    </a>
+                    <button class="delete-btn" data-id="${link.id}" title="Delete link">🗑️</button>
+                </div>
+                <span class="link-category ${categoryClass}">
+                    ${categoryEmoji} ${link.category}
+                </span>
+                ${link.price ? `<div class="link-price">${link.price}</div>` : ''}
+            </div>
+        </article>
+    `;
+}
 
-// Initialize app when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
+// Handle filter button click
+function handleFilterClick(e) {
+    const category = e.target.dataset.category;
+    
+    // Update active button
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    e.target.classList.add('active');
+    
+    // Set filter and re-render
+    Categorizer.setFilter(category);
+    renderLinks();
+    
+    console.log('Filter changed to:', category);
+}
+
+// Handle delete
+function handleDelete(id) {
+    if (confirm('Are you sure you want to delete this link?')) {
+        Storage.deleteLink(id);
+        renderLinks();
+        console.log('Link deleted, ID:', id);
+    }
 }
